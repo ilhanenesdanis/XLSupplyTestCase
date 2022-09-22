@@ -1,10 +1,12 @@
 using Manager;
+using Manager.Service;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 using System.Reflection;
 
 namespace XLSupplyTestCase
@@ -22,6 +24,10 @@ namespace XLSupplyTestCase
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddSession(opt =>
+            {
+                opt.IdleTimeout = TimeSpan.FromMinutes(30);
+            });
             services.AddDbContext<Context>(x =>
             {
                 x.UseSqlServer(Configuration.GetConnectionString("SqlConnection"), opt =>
@@ -29,6 +35,7 @@ namespace XLSupplyTestCase
                     opt.MigrationsAssembly(Assembly.GetAssembly(typeof(Context)).GetName().Name);
                 });
             });
+            services.AddScoped<IService, Service>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,7 +53,7 @@ namespace XLSupplyTestCase
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();
@@ -55,7 +62,7 @@ namespace XLSupplyTestCase
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Login}/{action=Login}/{id?}");
             });
         }
     }
