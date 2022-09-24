@@ -14,5 +14,6 @@ namespace Manager.Service
         string DeleteFile(string filePath);
         void AddProduct(List<CsvProductDto> csvProduct, int fileId);
         List<ProductListDto> GetAllProductsList(int fileId);
+
     }
 }

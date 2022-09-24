@@ -1,18 +1,16 @@
 ﻿using Manager.Entity;
 using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Manager
 {
     public class Context : DbContext
     {
-        public Context(DbContextOptions<Context> options) : base(options)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            optionsBuilder.UseSqlServer(@"Data Source=DESKTOP-VORNP2E;Initial Catalog=XlSupplyTestCase;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+            
         }
         public DbSet<Member> Members { get; set; }
         public DbSet<MemberFiles> MemberFiles { get; set; }
@@ -27,7 +25,8 @@ namespace Manager
         {
             foreach (var item in ChangeTracker.Entries())
             {
-                if(item.Entity is BaseEntity baseEntity){
+                if (item.Entity is BaseEntity baseEntity)
+                {
                     switch (item.State)
                     {
                         case EntityState.Added:
@@ -36,7 +35,7 @@ namespace Manager
                                 baseEntity.Status = true;
                             }
                             break;
-                       
+
                     }
                 }
             }

@@ -28,13 +28,6 @@ namespace XLSupplyTestCase
             {
                 opt.IdleTimeout = TimeSpan.FromMinutes(30);
             });
-            services.AddDbContext<Context>(x =>
-            {
-                x.UseSqlServer(Configuration.GetConnectionString("SqlConnection"), opt =>
-                {
-                    opt.MigrationsAssembly(Assembly.GetAssembly(typeof(Context)).GetName().Name);
-                });
-            });
             services.AddScoped<IService, Service>();
         }
 

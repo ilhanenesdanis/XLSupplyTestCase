@@ -14,13 +14,7 @@ namespace Manager.Service
 {
     public class Service : IService
     {
-        private readonly Context _context;
-
-        public Service(Context context)
-        {
-            _context = context;
-        }
-
+        Context _context = new();
         public void AddMemberFile(AddMemberFileDto memberFile)
         {
             MemberFiles member = new MemberFiles()
@@ -37,8 +31,6 @@ namespace Manager.Service
             var productList = ReadFile(filePath);
             var FileDelete = DeleteFile(filePath);
             AddProduct(productList, member.Id);
-
-
         }
 
         public void AddProduct(List<CsvProductDto> csvProduct, int fileId)
@@ -141,7 +133,6 @@ namespace Manager.Service
                 return "Kayıt Bulunamadı";
             }
         }
-
         public List<ProductListDto> GetAllProductsList(int fileId)
         {
             var result = _context.Products.Include(x => x.ProductImages).Where(x => x.FileId == fileId).Select(x => new ProductListDto

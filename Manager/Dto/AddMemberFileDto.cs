@@ -8,6 +8,7 @@ namespace Manager.Dto
 {
     public class AddMemberFileDto
     {
+        public int Id { get; set; }
         public string FtpUrl { get; set; }
         public string UserName { get; set; }
         public string FptPassword { get; set; }
