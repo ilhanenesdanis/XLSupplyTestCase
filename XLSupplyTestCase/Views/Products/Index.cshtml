@@ -1,8 +1,51 @@
-﻿
+﻿@model List<Manager.Dto.ProductListDto>
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@section Links{
+    <link href="/assets/css/vendor/dataTables.bootstrap5.css" rel="stylesheet" type="text/css">
+    <link href="/assets/css/vendor/responsive.bootstrap5.css" rel="stylesheet" type="text/css">
+}
 
-<h1>Index</h1>
-
+    <div class="row mt-3">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table id="basic-datatable" class="table dt-responsive nowrap w-100">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Barcode</th>
+                                    <th>Marka</th>
+                                    <th>Kategori</th>
+                                    <th>Ürün Adı</th>
+                                    <th>Ürün Kodu</th>
+                                    <th>Fiyat</th>
+                                    <th>Desi</th>
+                                    <th>Stok</th>
+                                    <th>Resim</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@item.Barcode</td>
+                                    <td>@item.Brand</td>
+                                    <td>@item.Category</td>
+                                    <td>@item.Name</td>
+                                    <td>@item.ProductCode</td>
+                                    <td>@item.Price</td>
+                                    <td>@item.Desi</td>
+                                    <td>@item.Stock</td>
+                                    <td><img style="width:50px;height:50px; object-fit:cover" src="@item.Image1" /></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

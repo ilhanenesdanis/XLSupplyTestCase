@@ -1,22 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Manager.Entity
+﻿namespace Manager.Dto
 {
-    public class Products : BaseEntity
+    public class ProductListDto
     {
         public string Barcode { get; set; }
         public decimal Price { get; set; }
         public int Stock { get; set; }
         public string Name { get; set; }
         public string ProductCode { get; set; }
-        public string Description { get; set; }
         public string Brand { get; set; }
         public string Category { get; set; }
         public decimal Desi { get; set; }
-        public int FileId { get; set; }
-        public MemberFiles MemberFiles { get; set; }
-        public List<ProductImage> ProductImages { get; set; }
-
+        public string Image1 { get; set; }
     }
 }

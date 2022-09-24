@@ -1,0 +1,75 @@
+﻿@model List<Manager.Dto.MemberFileDto>
+@{
+    ViewData["Title"] = "MyFiles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="row">
+        <div class="col-12 mb-4">
+            <form asp-controller="Products" asp-action="AddFiles" method="post">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="billing-first-name" class="form-label">Ftp Url</label>
+                            <input class="form-control" name="FtpUrl" type="text" placeholder="Lütfen FTP Adresi Giriniz" id="billing-first-name">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="billing-last-name" class="form-label">Dosya Adı</label>
+                            <input class="form-control" name="FileName" type="text" placeholder="Lütfen Dosya Adı Giriniz" id="billing-last-name">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="billing-first-name" class="form-label">Ftp Kullanıcı Adı</label>
+                            <input class="form-control" name="UserName" type="text" placeholder="Lütfen Ftp Kullanıcı Adınızı Giriniz" id="billing-first-name">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="billing-last-name" class="form-label">Last Name</label>
+                            <input class="form-control" name="FptPassword" type="text" placeholder="Lütfen Ftp Parolanızı Giriniz" id="billing-last-name">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="text-sm-end">
+                           <button class="btn btn-danger">Kaydet</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-12 mt-11">
+            <table class="table table-hover table-centered mb-0">
+                <thead>
+                    <tr>
+                        <th>Dosya Adı</th>
+                        <th>Ftp Adresi</th>
+                        <th>Sisteme Yükleme Zamanı</th>
+                        <th>Ürünlere Git</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null)
+                    {
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.FileName</td>
+                                <td>@item.FtpUrl</td>
+                                <td>@item.CreateDate</td>
+                                <td><a asp-controller="Products" asp-action="Index" asp-route-id="@item.Id" class="btn btn-info">Ürünleri Listele</a></td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+

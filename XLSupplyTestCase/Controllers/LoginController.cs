@@ -2,6 +2,8 @@
 using Manager.Service;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.IO;
+using System.Net;
 
 namespace XLSupplyTestCase.Controllers
 {
@@ -36,9 +38,7 @@ namespace XLSupplyTestCase.Controllers
                 return View();
             }
             HttpContext.Session.SetInt32("MemberId", MemberId);
-            //Redirect Yapılacak
-            
-            return View();
+            return RedirectToAction("MyFiles", "Products");
         }
     }
 }
